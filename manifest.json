@@ -17,5 +17,14 @@
       "48": "icon48.png",
       "128": "icon128.png"
     }
+  },
+  "commands": {
+    "start-recognition": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+S",
+        "mac": "Command+Shift+S"
+      },
+      "description": "Start speech recognition"
+    }
   }
 }
