@@ -1,7 +1,17 @@
 document.addEventListener("DOMContentLoaded", () => {
+  let recognition;
+  let isListening = false;
+
   document.getElementById("start").addEventListener("click", () => {
-    console.log("Button clicked");
-    startRecognition();
+    if (isListening) {
+      recognition.stop();
+      isListening = false;
+      document.getElementById("start").innerText = "Start Recognition";
+    } else {
+      startRecognition();
+      isListening = true;
+      document.getElementById("start").innerText = "Stop Recognition";
+    }
   });
 
   document.getElementById("copy").addEventListener("click", () => {
@@ -29,14 +39,15 @@ document.addEventListener("DOMContentLoaded", () => {
     navigator.mediaDevices.getUserMedia({ audio: true })
       .then((stream) => {
         console.log("Microphone access granted");
-        const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+        recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
         recognition.lang = "en-US";
         recognition.interimResults = false;
+        recognition.continuous = false;  // Disable continuous listening
         recognition.maxAlternatives = 1;
 
         recognition.onresult = (event) => {
           const transcript = event.results[0][0].transcript;
-          document.getElementById("result").innerText = `: ${transcript}`;
+          document.getElementById("result").innerText += ` ${transcript}`; // Append text
         };
 
         recognition.onerror = (event) => {
@@ -44,7 +55,13 @@ document.addEventListener("DOMContentLoaded", () => {
         };
 
         recognition.onend = () => {
-          console.log("Recognition ended");
+          if (isListening) {
+            setTimeout(() => {
+              recognition.start(); // Restart recognition with a delay
+            }, 500);  // Adjust the delay as needed
+          } else {
+            console.log("Recognition ended");
+          }
         };
 
         recognition.start();
