@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   document.getElementById("copy").addEventListener("click", () => {
-    const textToCopy = document.getElementById("result").innerText;
+    const textToCopy = document.getElementById("result").value;
     if (textToCopy) {
       navigator.clipboard.writeText(textToCopy)
         .then(() => {
@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         recognition.onresult = (event) => {
           const transcript = event.results[0][0].transcript;
-          document.getElementById("result").innerText += ` ${transcript}`; // Append text
+          document.getElementById("result").value += ` ${transcript}`; // Append text
         };
 
         recognition.onerror = (event) => {
