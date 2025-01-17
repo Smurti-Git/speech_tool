@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (textToCopy) {
       navigator.clipboard.writeText(textToCopy)
         .then(() => {
-          
+          alert("Text copied successfully!");
         })
         .catch((err) => {
           console.error("Error copying text: ", err);
