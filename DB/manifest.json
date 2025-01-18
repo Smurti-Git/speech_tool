@@ -1,0 +1,30 @@
+{
+  "manifest_version": 3,
+  "name": "Voice Recognition Extension",
+  "version": "1.0",
+  "description": "An extension to perform voice recognition and display the results.",
+  "permissions": ["activeTab", "storage", "tabs"],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_icon": {
+      "16": "images/icon16.png",
+      "48": "images/icon48.png",
+      "128": "images/icon128.png"
+    }
+  },
+  "commands": {
+    "start-recognition": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+Y"
+      },
+      "description": "Start voice recognition"
+    }
+  },
+  "icons": {
+    "16": "images/icon16.png",
+    "48": "images/icon48.png",
+    "128": "images/icon128.png"
+  }
+}
