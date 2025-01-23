@@ -1,30 +1,24 @@
 {
   "manifest_version": 3,
-  "name": "Voice Recognition Extension",
+  "name": "Speech Recognition with Scores",
   "version": "1.0",
-  "description": "An extension to perform voice recognition and display the results.",
-  "permissions": ["activeTab", "storage", "tabs"],
+  "description": "A Chrome extension for speech recognition with text and score matching.",
+  "permissions": ["storage", "activeTab", "scripting"],
   "background": {
     "service_worker": "background.js"
   },
   "action": {
-    "default_icon": {
-      "16": "images/icon16.png",
-      "48": "images/icon48.png",
-      "128": "images/icon128.png"
-    }
+    "default_popup": "window.html"
   },
-  "commands": {
-    "start-recognition": {
-      "suggested_key": {
-        "default": "Ctrl+Shift+Y"
-      },
-      "description": "Start voice recognition"
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["script.js"]
     }
-  },
+  ],
   "icons": {
-    "16": "images/icon16.png",
-    "48": "images/icon48.png",
-    "128": "images/icon128.png"
+    "16": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
   }
 }
